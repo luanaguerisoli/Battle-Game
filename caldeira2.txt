@@ -1,0 +1,8 @@
+rhana,vamo viver isso,2005,0,0,0,53
+luana,vou me m na tua frente,2005,0,0,0,50
+gustavo,gays,2005,0,0,0,50
+dori,bahia,2007,0,0,0,50
+brenda,nicolas,2002,0,1,0,50
+julia,divou mais,2005,0,0,0,50
+vitoria,divou,2003,1,0,1,45
+gabriel,neu,2004,0,0,1,40
