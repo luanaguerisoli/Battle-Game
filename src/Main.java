@@ -6,126 +6,125 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-
         while (true){
             System.out.println("BALLIT CHAMPIONSHIP");
-            System.out.println("Escolha uma opção:");
-            System.out.println("1. Iniciar um novo campeonato");
-            System.out.println("2. Ver resultados anteriores");
-            System.out.println("3. Sair");
+            System.out.println("Choose an option:");
+            System.out.println("1. Start a new tournament");
+            System.out.println("2. View previous results");
+            System.out.println("3. Exit");
 
             int menu = 0;
             if (sc.hasNextInt()) { menu = sc.nextInt(); sc.nextLine();
             } else {
-                System.out.println("Opção inválida. Digite um número.");
+                System.out.println("Invalid option. Enter a number.");
                 sc.nextLine();  continue; }
 
             switch (menu){
                 case 1:
-                    int numTimes = 0;
-                    System.out.println("Digite a quantidade de times presentes no campeonato. O número deve ser par, maior que 8 e menor que 16.");
+                    int numTeams = 0;
+                    System.out.println("Enter the number of teams in the tournament. The number must be even, >= 8 and <= 16.");
 
-                    while (numTimes % 2 != 0 || numTimes < 8 || numTimes > 16) {
+                    while (numTeams % 2 != 0 || numTeams < 8 || numTeams> 16) {
                         if (sc.hasNextInt()) {
-                            numTimes = sc.nextInt();
-                            if (numTimes % 2 == 0 && numTimes >= 8 && numTimes <= 16) {
-                                sc.nextLine(); // consumir newline restante antes de ler nomes
+                            numTeams= sc.nextInt();
+                            if (numTeams% 2 == 0 && numTeams>= 8 && numTeams<= 16) {
+                                sc.nextLine(); //
                                 break;
                             }
                         }
-                        System.out.println("Número inválido. Digite novamente.");
+                        System.out.println("Invalid number. Enter again.");
                         sc.nextLine();
                     }
 
-                    ArrayList<Time> times = new ArrayList<Time>();
+                    ArrayList<Team> teams = new ArrayList<Team>();
 
-                    for (int i = 0; i < numTimes; i++) {
-                        String nome = "";
-                        String grito = "";
-                        int ano = 0;
+                    for (int i = 0; i < numTeams;i++){
+                        String name = "";
+                        String battleCry = "";
+                        int year = 0;
 
-                        while (nome.isEmpty()) {
-                            System.out.println("Digite o nome do time " + (i + 1) + ": ");
-                            nome = sc.nextLine().trim();
-                            if (nome.isEmpty()) {
-                                System.out.println("Nome do time não pode ser vazio. Tente novamente.");
+                        while (name.isEmpty()) {
+                            System.out.println("Enter the team name " + (i + 1) + ": ");
+                            name = sc.nextLine().trim();
+                            if (name.isEmpty()) {
+                                System.out.println("Team name cannot be empty. Try again.");
                             }
                         }
 
-                        while (grito.isEmpty()) {
-                            System.out.println("Digite o grito de guerra do time " + (i + 1) + ": ");
-                            grito = sc.nextLine().trim();
-                            if (grito.isEmpty()) {
-                                System.out.println("Grito de guerra não pode ser vazio. Tente novamente.");
+                        while (battleCry.isEmpty()) {
+                            System.out.println("Enter the battle cry of team " + (i + 1) + ": ");
+                            battleCry = sc.nextLine().trim();
+                            if (battleCry.isEmpty()) {
+                                System.out.println("Battle cry cannot be empty. Try again.");
                             }
                         }
 
-                        boolean anoValido = false;
-                        while (!anoValido) {
-                            System.out.println("Digite o ano de fundação do time " + (i + 1) + ": ");
+                        boolean validYear = false;
+                        while (!validYear) {
+                            System.out.println("Enter the founding year of team " + (i + 1) + ": ");
                             if (sc.hasNextInt()) {
-                                ano = sc.nextInt();
+                                year = sc.nextInt();
                                 sc.nextLine();
-                                anoValido = true;
+                                validYear = true;
                             } else {
-                                System.out.println("Número inválido. Tente novamente.");
+                                System.out.println("Invalid number. Try again.");
                                 sc.nextLine();
                             }
                         }
 
-                        times.add(new Time(nome, grito, ano));
+                        teams.add(new Team(name, battleCry, year));
                     }
 
-                    Fases fases = new Fases(times);
-                    fases.iniciar();
+                    Phases phases = new Phases(teams);
+                    phases.start();
 
-                    Tabela tabela = new Tabela(times);
-                    tabela.Resultados();
+                    Scoreboard scoreboard = new Scoreboard(teams);
+                    scoreboard.showResults();
 
-                    System.out.println("Deseja salvar os resultados do campeonato? (s/n)");
-                    String salvar = sc.nextLine().trim().toLowerCase();
+                    System.out.println("Do you want to save the tournament results? (y/n)");
+                    String save = sc.nextLine().trim().toLowerCase();
 
-                    if (salvar.equals("sim") || salvar.equals("s")) {
-                        System.out.println("Deseja salvar com qual nome?");
-                        String nomeArquivo = sc.nextLine().trim();
-                        while (nomeArquivo.isEmpty()) {
-                            System.out.println("Nome do arquivo não pode ser vazio. Tente novamente.");
-                            nomeArquivo = sc.nextLine().trim();
+                    if (save.equals("yes") || save.equals("y")) {
+                        System.out.println("What filename should be used to save?");
+                        String arquiveName = sc.nextLine().trim();
+                        while (arquiveName.isEmpty()) {
+                            System.out.println("Filename cannot be empty. Try again.");
+                            arquiveName = sc.nextLine().trim();
                         }
-                        if (!nomeArquivo.endsWith(".txt")) {
-                            nomeArquivo += ".txt";
+                        if (!arquiveName.endsWith(".txt")) {
+                            arquiveName += ".txt";
                         }
-                        ArquivoDados.salvarTimesEmArquivo(nomeArquivo, times);
-                        System.out.println("Resultados salvos com sucesso em " + nomeArquivo);
+                        ArchivesData.saveTeamsToFile(arquiveName, teams);
+                        System.out.println("Results saved successfully as " + arquiveName);
                     } else {
-                        System.out.println("Resultados não foram salvos.");
+                        System.out.println("Results were not saved.");
                     }
 
-                    break; // evita cair no case 2
+                    break;
 
                 case 2:
-                    System.out.println("---------Digite o nome do arquivo para carregar:");
-                    String nomeArquivoCarregar = sc.nextLine().trim();
+                    System.out.println("---------Enter the filename to load:");
+                    String downloadArchiveName = sc.nextLine().trim();
                     while (true) {
-                        if (!nomeArquivoCarregar.isEmpty()) {
-                            if (!nomeArquivoCarregar.endsWith(".txt")) {
-                                nomeArquivoCarregar += ".txt";
+                        if (!downloadArchiveName.isEmpty()) {
+                            if (!downloadArchiveName.endsWith(".txt")) {
+                                downloadArchiveName += ".txt";
                             }
-                            List<Time> timesAnteriores = ArquivoDados.carregarTimesDeArquivo(nomeArquivoCarregar);
-                            Tabela tabelaAnteriores = new Tabela(timesAnteriores);
-                            tabelaAnteriores.Resultados();
+                            List<Team> lateTeams = ArchivesData.loadTeamsFromFile(downloadArchiveName);
+                            Scoreboard lateScoreboards = new Scoreboard(lateTeams);
+                            lateScoreboards.showResults();
                             break;
                         } else {
-                            System.out.println("Nome do arquivo não pode ser vazio. Tente novamente.");
-                            nomeArquivoCarregar = sc.nextLine();
+                            System.out.println("Filename cannot be empty. Try again.");
+                            downloadArchiveName = sc.nextLine();
                         }
                     }
                     break;
                 case 3:
-                    System.out.println("Saindo...");
+                    System.out.println("Exiting...");
                     return;
                 default:
-                    System.out.println("Opção inválida. Escolha 1, 2 ou 3.");
+                    System.out.println("Invalid option. Choose 1, 2 or 3.");
                     break;
             }
         }
