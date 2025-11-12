@@ -1,8 +1,0 @@
-larissa,jesus,2005,0,0,0,53
-rhana,vamo viver isso,2005,0,0,0,50
-dori,bahia,2007,0,0,0,50
-luana,vou me matar na tua frente,2005,0,0,0,50
-ezekiel,gay enrustido,2006,0,0,0,50
-joao,heteros,2004,0,0,0,50
-hazel,8 mil,2000,0,0,0,50
-luiza,meu querido eu sou cantora,2005,0,0,0,50
