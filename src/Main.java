@@ -44,7 +44,7 @@ public class Main {
                         int year = 0;
 
                         while (name.isEmpty()) {
-                            System.out.println("Enter the team name " + (i + 1) + ": ");
+                            System.out.println("Enter the team name: " + (i + 1) + ": ");
                             name = sc.nextLine().trim();
                             if (name.isEmpty()) {
                                 System.out.println("Team name cannot be empty. Try again.");
@@ -52,7 +52,7 @@ public class Main {
                         }
 
                         while (battleCry.isEmpty()) {
-                            System.out.println("Enter the battle cry of team " + (i + 1) + ": ");
+                            System.out.println("Enter the battle cry of team: " + (i + 1) + ": ");
                             battleCry = sc.nextLine().trim();
                             if (battleCry.isEmpty()) {
                                 System.out.println("Battle cry cannot be empty. Try again.");
@@ -61,7 +61,7 @@ public class Main {
 
                         boolean validYear = false;
                         while (!validYear) {
-                            System.out.println("Enter the founding year of team " + (i + 1) + ": ");
+                            System.out.println("Enter the founding year of team: " + (i + 1) + ": ");
                             if (sc.hasNextInt()) {
                                 year = sc.nextInt();
                                 sc.nextLine();
